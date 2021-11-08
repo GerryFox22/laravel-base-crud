@@ -15,6 +15,10 @@
                     <a href="{{ route('comics.show', ['comic' => $comic->id ]) }}">
                         <button class="btn btn-primary">Scopri di piu</button>
                     </a>
+
+                    <a href="{{ route('comics.edit', ['comic' => $comic->id ]) }}">
+                        <button class="btn btn-secondary">Modifica</button>
+                    </a>
                     
                 </div>
             @endforeach
