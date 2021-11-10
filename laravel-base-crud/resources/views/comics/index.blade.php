@@ -19,9 +19,32 @@
                     <a href="{{ route('comics.edit', ['comic' => $comic->id ]) }}">
                         <button class="btn btn-secondary">Modifica</button>
                     </a>
+
+                    <form action="{{ route('comics.destroy', ['comic' => $comic->id ]) }}" 
+                    method="POST"
+                    class="delete-form"
+                    data-titolo='{{ $comic->titolo }}'
+                    data-id='{{ $comic->id }}'>
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Elimina</button>
+                    </form>
                     
                 </div>
             @endforeach
         </div>
     </div>
 @endsection
+
+<script>
+    const deleteFormElements = document.querySelectorAll('.delete-form');
+    deleteFormElements.foreach(form => {
+        form.addEventListener('submit', function(event){
+            event.preventDefault();
+            const id = form.getAttribute('data-id');
+            const titolo = form.getAttribute('data-titolo');
+            const confirm = window.confirm('Sei sicuro di voler eliminare ?');
+            if (confirm) this.submit();
+        })
+    });
+</script>
